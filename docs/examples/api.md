@@ -15,7 +15,7 @@ and get a session token.
 import pyhiveapi as Hive
 
 tokens = {}
-auth = Hive.Auth("khole_47@me.com", "cussyh-Podpeb-sanpo3")
+auth = Hive.Auth(<Hive Username>", "Hive Password")
 session = auth.login()
 if session.get("ChallengeName") == Hive.SMS_REQUIRED:
     # Complete SMS 2FA.
