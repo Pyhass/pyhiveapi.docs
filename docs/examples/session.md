@@ -6,9 +6,10 @@ sidebar: example
 
 Below are examples on how to use the library with a Hive session.
 
-# Log in - Using Hive Username and Password
+# Log in - Using Hive Username and Password with MFA(if required)
 
 Below is an example of how to log in to Hive using your Hive Username and Hive password, using 2FA if needed, to create a pyhiveapi `session` object.
+NOTE - as part of Hive login it now registers your dewvice as a trusted device on sucessfull login. The device data will be needed for furthur logins in the future, this libary has a device login method to support this.
 
 ```Python
 from pyhiveapi import Hive, SMS_REQUIRED
@@ -18,10 +19,34 @@ login = session.login()
 
 if login.get("ChallengeName") == SMS_REQUIRED:
     code = input("Enter 2FA code: ")
-    session.sms_2fa(code, login)
+    session.sms2fa(code, login)
+
+# Device data is need for future device logins
+deviceData = session.auth.getDeviceData()
+print(deviceData)
 
 session.startSession()
 ```
+
+# Log in - Using Hive Device Authentication
+
+Below is an example of how to log in to Hive using device authentication, to create a pyhiveapi `session` object.
+
+
+```Python
+from pyhiveapi import Hive, SMS_REQUIRED
+
+session = Hive(
+    username="<Hive Username>",
+    password="<Hive Password>",
+    deviceGroupKey="<Hive Device Group Key>",
+    deviceKey="<Hive Device Key>",
+    devicePassword="<Hive Device Password>",
+)
+session.deviceLogin()
+session.startSession()
+```
+
 
 ## Use the session object to get devices
 
