@@ -78,6 +78,6 @@ Below is an example how to data from the Hive platform
 using the session token acquired from login.
 
 ```Python
-api = Hive.HiveApi(token=session["IdToken"])
+api = Hive.HiveApi(token=tokens["IdToken"])
 data = api.getAll()
 ```
