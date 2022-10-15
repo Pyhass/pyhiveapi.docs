@@ -9,7 +9,7 @@ Below are examples on how to use the library with a Hive session.
 # Log in - Using Hive Username and Password with MFA(if required)
 
 Below is an example of how to log in to Hive using your Hive Username and Hive password, using 2FA if needed, to create a pyhiveapi `session` object.
-NOTE - as part of Hive login it now registers your dewvice as a trusted device on sucessfull login. The device data will be needed for furthur logins in the future, this libary has a device login method to support this.
+NOTE - as part of Hive login it now registers your device as a trusted device on sucessfull login. The device data will be needed for further logins in the future, this libary has a device login method to support this.
 
 ```Python
 from pyhiveapi import Hive, SMS_REQUIRED
