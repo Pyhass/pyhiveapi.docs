@@ -15,16 +15,12 @@ and get a session token.
 import pyhiveapi as Hive
 
 tokens = {}
-hive_auth = Hive.Auth(<Hive Username>", "<Hive Password>")
+hive_auth = Hive.Auth("<Hive Username>", "<Hive Password>")
 authData = hive_auth.login()
 
 if authData.get("ChallengeName") == "SMS_MFA":
     code = input("Enter your 2FA code: ")
-    authData = hive_auth.sms_2fa(code, tokens)
-
-
-device_data = hive_auth.getDeviceData()
-print(device_data)
+    authData = hive_auth.sms_2fa(code, authData)
 
 if "AuthenticationResult" in authData:
     session = authData["AuthenticationResult"]
@@ -82,6 +78,6 @@ Below is an example how to data from the Hive platform
 using the session token acquired from login.
 
 ```Python
-api = Hive.HiveApi()
-data = api.getAllData(tokens["token"])
+api = Hive.HiveApi(token=session["IdToken"])
+data = api.getAll()
 ```
