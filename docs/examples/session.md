@@ -22,8 +22,8 @@ if login.get("ChallengeName") == SMS_REQUIRED:
     session.sms2fa(code, login)
 
 # Device data is need for future device logins
-deviceData = session.auth.getDeviceData()
-print(deviceData)
+device_data = session.auth.get_device_data()
+print(device_data)
 
 session.startSession()
 ```
@@ -34,14 +34,14 @@ Below is an example of how to log in to Hive using device authentication, to cre
 
 
 ```Python
-from pyhiveapi import Hive, SMS_REQUIRED
+from pyhiveapi import Hive, Auth as HiveAuth, SMS_REQUIRED
 
-session = Hive(
+session = HiveAuth(
     username="<Hive Username>",
     password="<Hive Password>",
-    deviceGroupKey="<Hive Device Group Key>",
-    deviceKey="<Hive Device Key>",
-    devicePassword="<Hive Device Password>",
+    device_group_key="<Hive Device Group Key>",
+    device_key="<Hive Device Key>",
+    device_password="<Hive Device Password>",
 )
 session.deviceLogin()
 session.startSession()

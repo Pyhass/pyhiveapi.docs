@@ -15,7 +15,7 @@ and get a session token.
 import pyhiveapi as Hive
 
 tokens = {}
-hive_auth = Hive.Auth("<Hive Username>", "<Hive Password>")
+hive_auth = Hive.Auth(username="<Hive Username>", password="<Hive Password>")
 authData = hive_auth.login()
 
 if authData.get("ChallengeName") == "SMS_MFA":
@@ -41,10 +41,10 @@ import pyhiveapi as Hive
 
 tokens = {}
 hive_auth = Hive.Auth(<Hive Username>", "<Hive Password>", "Hive Device Group Key>", "<Hive Device Key>", "<Hive Device Password>")
-authData = hive_auth.deviceLogin()
+auth_data = hive_auth.device_login()
 
-if "AuthenticationResult" in authData:
-    session = authData["AuthenticationResult"]
+if "AuthenticationResult" in auth_data:
+    session = auth_data["AuthenticationResult"]
     tokens.update({"token": session["IdToken"]})
     tokens.update({"refreshToken": session["RefreshToken"]})
     tokens.update({"accessToken": session["AccessToken"]})
@@ -62,11 +62,11 @@ import pyhiveapi as Hive
 
 tokens = {}
 hive_auth = Hive.Auth(<Hive Username>", "<Hive Password>", "Hive Device Group Key>", "<Hive Device Key>", "<Hive Device Password>")
-authData = hive_auth.deviceLogin()
-newTokens = hive_auth.refreshToken(tokens['AuthenticationResult']['RefreshToken'])
+auth_data = hive_auth.device_login()
+new_tokens = hive_auth.refresh_token(tokens['AuthenticationResult']['RefreshToken'])
 
-if "AuthenticationResult" in newTokens:
-    session = newTokens["AuthenticationResult"]
+if "AuthenticationResult" in new_tokens:
+    session = new_tokens["AuthenticationResult"]
     tokens.update({"token": session["IdToken"]})
     tokens.update({"refreshToken": session["RefreshToken"]})
     tokens.update({"accessToken": session["AccessToken"]})
@@ -78,6 +78,6 @@ Below is an example how to data from the Hive platform
 using the session token acquired from login.
 
 ```Python
-api = Hive.HiveApi(token=tokens["IdToken"])
+api = Hive.API(token=tokens["IdToken"])
 data = api.getAll()
 ```
