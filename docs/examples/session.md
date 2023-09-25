@@ -22,7 +22,7 @@ if login.get("ChallengeName") == SMS_REQUIRED:
     session.sms2fa(code, login)
 
 # Device data is need for future device logins
-device_data = session.auth.get_device_data()
+device_data = session.get_device_data()
 print(device_data)
 
 session.startSession()
